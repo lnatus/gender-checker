@@ -1,0 +1,29 @@
+{
+  "name": "gender-checker",
+  "version": "0.0.0",
+  "description": "Gender Checker API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lnatus/gender-checker"
+  },
+  "keywords": [
+    "gender",
+    "checker",
+    "api"
+  ],
+  "author": "lnatus",
+  "license": "-",
+  "bugs": {
+    "url": "https://github.com/lnatus/gender-checker/issues"
+  },
+  "dependencies": {
+    "express": "~4.14.0",
+    "https": "~1.0.0",
+    "http": "0.0.0",
+    "fs": "0.0.1-security"
+  }
+}
