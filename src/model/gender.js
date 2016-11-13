@@ -2,14 +2,16 @@ var mongoose = require('mongoose');
 
 /* Gender Schema */
 
-var genderSchema = mongoose.Schema({
+var GenderSchema = mongoose.Schema({
 	name : { type : String },
 	type : { type : String }
 });
 
 /* Gender Validation */
 
-ArticleSchema.path('name').required(true, 'name is required');
-ArticleSchema.path('type').required(true, 'type is required');
+GenderSchema.path('name').required(true, 'name is required');
+GenderSchema.path('type').required(true, 'type is required');
 
-mongoose.model('Gender', genderSchema);
+var Gender = mongoose.model('Gender', GenderSchema, "Gender");
+
+module.exports = Gender;

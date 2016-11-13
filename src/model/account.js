@@ -3,7 +3,7 @@ var subscription = require('../config/subscription')
 
 /* Account Schema */
 
-var accountSchema = mongoose.Schema({
+var AccountSchema = mongoose.Schema({
 	apiKey : { type : String },
 	firstName : { type : String},
 	lastName : { type : String},
@@ -15,22 +15,24 @@ var accountSchema = mongoose.Schema({
 
 /* Account Validation */
 
-ArticleSchema.path('apiKey').required(true, 'apiKey is required');
-ArticleSchema.path('firstName').required(true, 'firstName is required');
-ArticleSchema.path('lastName').required(true, 'lastName is required');
+AccountSchema.path('apiKey').required(true, 'apiKey is required');
+AccountSchema.path('firstName').required(true, 'firstName is required');
+AccountSchema.path('lastName').required(true, 'lastName is required');
 
 /* Account Methods */
 
-accountSchema.methods.isDailyLimitExceeded = function () {
+AccountSchema.methods.isDailyLimitExceeded = function () {
 	return subscription[this.subscription] < this.requestCount;
 }
 
-accountSchema.methods.incRequestCount = function () {
+AccountSchema.methods.incRequestCount = function () {
 	this.requestCount++;
 }
 
-accountSchema.methods.resetRequestCount = function () {
+AccountSchema.methods.resetRequestCount = function () {
 	this.requestCount = 0;
 }
 
-mongoose.model('Account', accountSchema);
+var Account = mongoose.model('Account', AccountSchema);
+
+module.exports = Account;
