@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var subscription = require('../config/subscription')
+var subscription = require('../config/subscription');
 
 /* Account Schema */
 
@@ -9,8 +9,8 @@ var AccountSchema = mongoose.Schema({
 	lastName : { type : String},
 	isActive : { type : Boolean, default : true},
 	createdAt : { type: Date, default : Date.now},
-	requestCount : { type: Number, default: 0}
-	subscription: { type: String, default : 'trial' lowercase : true}
+	requestCount : { type: Number, default: 0},
+	subscription: { type: String, default : 'trial', lowercase : true}
 });
 
 /* Account Validation */

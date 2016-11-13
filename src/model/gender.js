@@ -7,6 +7,12 @@ var GenderSchema = mongoose.Schema({
 	type : { type : String }
 });
 
+/* Gender Methods */
+
+GenderSchema.methods.findByName = function (name, next) {
+  return this.model('Gender').findOne({ name : name.toUpperCase() }, '-_id name gender', next);
+};
+
 /* Gender Validation */
 
 GenderSchema.path('name').required(true, 'name is required');
