@@ -21,6 +21,10 @@ AccountSchema.path('lastName').required(true, 'lastName is required');
 
 /* Account Methods */
 
+AccountSchema.methods.findByApiKey = function (apiKey, next) {
+	return this.model('Account').findOne({ apiKey : apiKey }, next);
+}
+
 AccountSchema.methods.isDailyLimitExceeded = function () {
 	return subscription[this.subscription] < this.requestCount;
 }
@@ -33,6 +37,6 @@ AccountSchema.methods.resetRequestCount = function () {
 	this.requestCount = 0;
 }
 
-var Account = mongoose.model('Account', AccountSchema);
+var Account = mongoose.model('Account', AccountSchema, 'Account');
 
 module.exports = Account;

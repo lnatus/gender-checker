@@ -24,13 +24,18 @@ var getRequestState = function (apiKey, name) {
 var getAccountState = function (apiKey, next) {
 	var state = { code : 0 };
 
-	Account.findOne({ 'apiKey' : apiKey }, function (err, result) {
+	var account = new Account();
+	account.findByApiKey(apiKey, function (err, result) {
 		if (err) {
-			next(error.api);
+			return next(error.api);
 		}
 
 		if (!result) {
-			next(error.apiKeySubscription);
+			return next(error.apiKeySubscription);
+		}
+
+		if(result.isDailyLimitExceeded()) {
+			return next(error.dailyLimitExceeded);
 		}
 
 		next(state, result);
@@ -40,13 +45,17 @@ var getAccountState = function (apiKey, next) {
 exports.read = function (req, res) {
 	var apiKey = req.query.apiKey;
 	var name = req.query.name;
-	var state = getRequestState(apiKey, name);
+	var reqState = getRequestState(apiKey, name);
 
-	if (state.code !== 0) {
-		res.send(state);
+	if (reqState.code !== 0) {
+		res.send(reqState);
 	} 
 
-	// TODO: Validate apiKey and check daily request limit.
+	getAccountState(apiKey, function(accState, result) {
+		// TODO: Handle State; 
+		// TODO: Inc requestCount on result
+		console.log(accState);
+	});
 
 	var gender = new Gender();
 	gender.findByName(name, function (err, result) {
