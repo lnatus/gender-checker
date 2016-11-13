@@ -3,6 +3,8 @@ var https = require('https');
 var http = require('http');
 var fs = require('fs');
 
+var api = require('./routes/api');
+
 var options = {
    key: fs.readFileSync('../cert/key.pem'),
   cert: fs.readFileSync('../cert/cert.pem')
@@ -10,9 +12,7 @@ var options = {
 
 var app = express();
 
-app.get('/', function(req, res){
-  res.send('Welcome to gender checker...');
-});
+app.get('/', api.read);
 
 http.createServer(app).listen(3000);
 https.createServer(options, app).listen(8000);
