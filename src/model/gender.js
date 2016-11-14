@@ -10,7 +10,7 @@ var GenderSchema = mongoose.Schema({
 /* Gender Methods */
 
 GenderSchema.methods.findByName = function (name, next) {
-  return this.model('Gender').findOne({ name : name.toUpperCase() }, '-_id name gender', next);
+  return this.model('Gender').findOne({ name : name.toLowerCase() }, '-_id name gender', next);
 };
 
 /* Gender Validation */

@@ -15,7 +15,7 @@ NameSchema.path('name').required(true, 'name is required');
 
 NameSchema.methods.saveIfNotExist = function () {
 	that = this;
-	that.name = that.name.toUpperCase();
+	that.name = that.name.toLowerCase();
 	return that.model('Name').findOne({ name : that.name }, function(err, result) {
 		if (!result) {
 			that.save(function(err, result){});
