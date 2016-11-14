@@ -5,11 +5,11 @@ var subscription = require('../config/subscription');
 
 var AccountSchema = mongoose.Schema({
 	apiKey : { type : String },
-	isActive : { type : Boolean, default : true },
-	createdAt : { type: Date, default : Date.now },
-	requestCount : { type: Number, default: 0 },
-	subscription: { type: String, default : 'trial', lowercase : true },
-	month: { type: Number, default: new Date().getMonth() }
+	requestCount : { type : Number, default: 0 },
+	subscription: { type : String, default : 'trial', lowercase : true },
+	duration : { type : Number, default : 3 },
+	expireDate : { type: Date, default: null },
+	month : { type : Number, default: new Date().getMonth() }
 });
 
 /* Account Validation */
@@ -32,6 +32,18 @@ AccountSchema.methods.isMonthlyLimitExceeded = function () {
 		this.save();
 		return false;
 	} 
+}
+
+AccountSchema.methods.isApiKeyExpired = function () {
+	if (!this.expireDate) {
+		var date = new Date()
+		date.setMonth(date.getMonth() + this.duration)
+		this.expireDate = date;
+		this.save();
+		return false;
+	} else {
+		return Date.now() > this.expireDate;
+	}
 }
 
 AccountSchema.methods.incRequestCount = function () {

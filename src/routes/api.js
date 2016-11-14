@@ -35,8 +35,8 @@ var getAccountState = function (apiKey, next) {
 			return next(error.apiKeySubscription);
 		}
 
-		if(!result.isActive) {
-			return next(error.apiSubscriptionNotActive)
+		if (result.isApiKeyExpired()) {
+			return next(error.apiSubscriptionExpired)
 		}
 
 		if(result.isMonthlyLimitExceeded()) {
