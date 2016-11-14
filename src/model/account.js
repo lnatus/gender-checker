@@ -5,19 +5,16 @@ var subscription = require('../config/subscription');
 
 var AccountSchema = mongoose.Schema({
 	apiKey : { type : String },
-	firstName : { type : String},
-	lastName : { type : String},
-	isActive : { type : Boolean, default : true},
-	createdAt : { type: Date, default : Date.now},
-	requestCount : { type: Number, default: 0},
-	subscription: { type: String, default : 'trial', lowercase : true}
+	isActive : { type : Boolean, default : true },
+	createdAt : { type: Date, default : Date.now },
+	requestCount : { type: Number, default: 0 },
+	subscription: { type: String, default : 'trial', lowercase : true },
+	month: { type: Number, default: new Date().getMonth() }
 });
 
 /* Account Validation */
 
 AccountSchema.path('apiKey').required(true, 'apiKey is required');
-AccountSchema.path('firstName').required(true, 'firstName is required');
-AccountSchema.path('lastName').required(true, 'lastName is required');
 
 /* Account Methods */
 
@@ -25,8 +22,16 @@ AccountSchema.methods.findByApiKey = function (apiKey, next) {
 	return this.model('Account').findOne({ apiKey : apiKey }, next);
 }
 
-AccountSchema.methods.isDailyLimitExceeded = function () {
-	return subscription[this.subscription] < this.requestCount;
+AccountSchema.methods.isMonthlyLimitExceeded = function () {
+	var month = new Date().getMonth();
+	if (month === this.month) {
+		return subscription[this.subscription] < this.requestCount;
+	} else {
+		this.month = month;
+		this.requestCount = 0;
+		this.save();
+		return false;
+	} 
 }
 
 AccountSchema.methods.incRequestCount = function () {

@@ -39,8 +39,8 @@ var getAccountState = function (apiKey, next) {
 			return next(error.apiSubscriptionNotActive)
 		}
 
-		if(result.isDailyLimitExceeded()) {
-			return next(error.dailyLimitExceeded);
+		if(result.isMonthlyLimitExceeded()) {
+			return next(error.monthlyLimitExceeded);
 		}
 
 		next(state, result);

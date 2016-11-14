@@ -5,7 +5,7 @@ var error = {
 	apiKeySubscription: { code : 102, error : 'Could not find subscription for this apiKey.'},
 	apiSubscriptionNotActive: { code: 103, error : 'Subscription for this apiKey is not active.'},
 	nameMissing : { code : 200, error : 'name parameter not found' },
-	dailyLimitExceeded : { code : 300, error : 'Daily request limit exceeded.'}
+	monthlyLimitExceeded : { code : 300, error : 'Monthly request limit exceeded.'}
 }
 
 module.exports = error;
