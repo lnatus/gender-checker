@@ -15,7 +15,7 @@ var app = express();
 
 app.get('/', api.read);
 
-mongoose.connect('mongodb://localhost/genderdb');
+mongoose.connect('mongodb://localhost/gcdb');
 
 http.createServer(app).listen(3000);
 https.createServer(options, app).listen(8000);
