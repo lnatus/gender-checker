@@ -19,7 +19,7 @@ Gender Checker API
 
 ### Error response
 
-`{ "code" : 100, "error" : "apiKey parameter not found" }
+`{ "code" : 100, "error" : "apiKey parameter not found" }`
 
 ### General Error Codes
 
