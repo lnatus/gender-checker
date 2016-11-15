@@ -1,8 +1,8 @@
 var validator = require('validator');
 var error = require('../config/error');
-var Gender = require('../model/Gender');
-var Account = require('../model/Account');
-var Name = require('../model/Name');
+var Gender = require('../model/gender');
+var Account = require('../model/account');
+var Name = require('../model/name');
 
 var getRequestState = function (apiKey, name) {
 	var state = { code : 0 };
