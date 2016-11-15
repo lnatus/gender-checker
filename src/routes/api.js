@@ -80,6 +80,9 @@ exports.read = function (req, res) {
 			res.send(accState);
 		}
 	});
+}
 
-	
+exports.notFound = function (req, res) {
+	res.status(404)        
+   		.send(error.notFound);
 }

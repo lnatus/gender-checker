@@ -5,7 +5,15 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 
+var env = require('./config/env');
 var api = require('./routes/api');
+
+/* 
+	dev or production build 
+	mode configurable in config/env.js
+*/
+
+var build = env[env.mode];
 
 var options = {
    key: fs.readFileSync(path.join(__dirname, '../cert') + '/key.pem'),
@@ -15,10 +23,9 @@ var options = {
 var app = express();
 
 app.get('/', api.read);
+app.get('*', api.notFound);
 
-//TODO: Config pev / prod 
-mongoose.connect('mongodb://localhost/gcdb');
-//mongoose.connect('mongodb://gc_mongoadmin:boo6XoaSha@localhost:21199/admin');
+mongoose.connect(build.mongoDBConnection);
 
-http.createServer(app).listen(61000);
-https.createServer(options, app).listen(61001);
+http.createServer(app).listen(build.httpPort);
+https.createServer(options, app).listen(build.httpsPort);
