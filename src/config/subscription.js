@@ -1,8 +1,7 @@
 var subscription = {
-	'trial' : 20,
-	'basic' : 1000,
-	'professional' : 10000,
-	'ultimate' : 100000
+	'trial' : 600,
+	'basic' : 10000,
+	'professional' : 100000
 }
 
 module.exports = subscription;
