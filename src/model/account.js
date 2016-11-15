@@ -9,7 +9,7 @@ var AccountSchema = mongoose.Schema({
 	subscription: { type : String, default : 'trial', lowercase : true },
 	duration : { type : Number, default : 3 },
 	expireDate : { type: Date, default: null },
-	month : { type : Number, default: new Date().getMonth() }
+	month : { type : Number, default: -1 }
 });
 
 /* Account Validation */
@@ -37,6 +37,7 @@ AccountSchema.methods.isMonthlyLimitExceeded = function () {
 AccountSchema.methods.isApiKeyExpired = function () {
 	if (!this.expireDate) {
 		var date = new Date()
+		this.month = date.getMonth();
 		date.setMonth(date.getMonth() + this.duration)
 		this.expireDate = date;
 		this.save();
