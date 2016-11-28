@@ -6,7 +6,7 @@ Gender Checker API
 
 ### Sample request
 
-`http:\\server\api?apiKey=B567228F-56C0-416D-BE1A-44820CFBEF22&name=Max`
+`http:\\gender-checker.com\api?apiKey=B567228F-56C0-416D-BE1A-44820CFBEF22&name=Max`
 
 	* apiKey (Required)
 	* name (Required)
