@@ -53,7 +53,7 @@ exports.read = function (req, res) {
 	var reqState = getRequestState(apiKey, name);
 
 	if (reqState.code !== 0) {
-		return res.send(reqState);
+		return res.status(reqState.code).send(reqState);
 	} 
 
 	getAccountState(apiKey, function(accState, accResult) {
@@ -62,7 +62,7 @@ exports.read = function (req, res) {
 			gender.findByName(name, function (err, result) {
 
 				if(err) {
-					return res.send(error.api);
+					return res.status(error.api.code).send(error.api);
 				}
 
 				accResult.incRequestCount();
@@ -77,7 +77,7 @@ exports.read = function (req, res) {
 				res.send(result);
 			});	
 		} else {
-			res.send(accState);
+			res.status(accState.code).send(accState);
 		}
 	});
 }
