@@ -1,4 +1,4 @@
-apiKey,subscription,requestCount,isActive,isExpired,month
+apiKey,subscription,requestCount,isUsed,isExpired,month
 A2F40635-F95F-4485-BC08-C1AD398AF269,basic,0,false,false,-1
 C95EF52A-7F0F-4052-866A-F7E7F2D98A0C,basic,0,false,false,-1
 D8A9BFAB-7279-4ED1-A651-6F200FABFCE8,basic,0,false,false,-1

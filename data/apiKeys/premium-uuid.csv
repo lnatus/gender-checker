@@ -1,4 +1,4 @@
-apiKey,subscription,requestCount,isActive,isExpired,month
+apiKey,subscription,requestCount,isUsed,isExpired,month
 CC876B26-628C-4197-ABB4-A7AF3CE8C5C4,premium,0,false,false,-1
 356EAE4A-5CCD-4B70-ABB4-11F46600E177,premium,0,false,false,-1
 14A8C0CC-2AC6-49B3-8A82-999069427973,premium,0,false,false,-1

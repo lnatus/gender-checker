@@ -1,4 +1,4 @@
-apiKey,subscription,requestCount,isActive,isExpired,month
+apiKey,subscription,requestCount,isUsed,isExpired,month
 29753E15-A66A-4CA3-B5EE-8F95E9D37CB3,ultimate,0,false,false,-1
 D92C12F9-128A-4304-8363-892C2393C2E9,ultimate,0,false,false,-1
 EDA5FC3C-DBAD-4DEB-8851-BCC292FDE208,ultimate,0,false,false,-1
