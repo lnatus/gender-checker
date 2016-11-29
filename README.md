@@ -19,24 +19,16 @@ Gender Checker API
 
 ### Error response
 
-`{ "code" : 100, "error" : "apiKey parameter not found" }`
+`{ code : 401, error : 'Unauthorized', message:'Parameter apiKey is invalid'}`
 
 ### General Error Codes
 
-	*	1 Unkown API Error
-	* 404 Route not found
+	*	500 Internal Server Error
+	* 400 Bad Request
+  * 404 Not Found
 
 ### API Key Error Codes
 
-	*	100 apiKey parameter not found
-	*	101	apiKey is invalid
-	*	102 Could not find subscription for this apiKey
-	*	103 Subcription for this apiKey is expired
-
-### Name Error Codes
-
-	* 200 name parameter not found
-
-### Limit Error Codes
-
-	* 300 Monthly request limit exceeded
+	*	401 Unauthorized (Parameter apiKey not found or invalid)
+	*	402 Payment Required (Subscription for this apiKey is expired)
+  * 429 Too Many Requests (Monthly request limit exceeded)
