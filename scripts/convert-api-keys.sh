@@ -1,11 +1,11 @@
 #!/bin/bash
-INPUT=basic-12-uuid.txt
+INPUT=test-uuid.txt
 OLDIFS=$IFS
 IFS=,
 [ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
 
 while read key
 do
-	echo $key,basic,12 >> basic-12-uuid.csv	
+	echo $key,test,0,false >> test-uuid.csv	
 done < $INPUT
 IFS=$OLDIFS
