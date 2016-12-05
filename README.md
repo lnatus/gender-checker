@@ -13,7 +13,17 @@ Gender Checker API
 
 ### Sample response
 
+#### Male
+
 `{ name : "Max", gender : "m"}`
+
+#### Female
+
+'{ name : "Lisa", gender : "f"}`
+
+#### Name not found 
+
+`{name : "RarelyName", gender: null}`
 
 ## Error Codes
 
