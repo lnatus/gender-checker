@@ -47,13 +47,23 @@ var getAccountState = function (apiKey, next) {
 	});
 }
 
+var sendResponse = function (res, state, payload, callback) {
+	if(callback) {
+		res.status(state).jsonp(payload);
+	} else {
+		res.status(state).send(payload);
+	}
+}
+
 exports.read = function (req, res) {
 	var apiKey = req.query.apiKey;
 	var name = req.query.name;
+	var callback = req.query.callback;
+
 	var reqState = getRequestState(apiKey, name);
 
 	if (reqState.code !== 0) {
-		return res.status(reqState.code).send(reqState);
+		return sendResponse(res, reqState.code, reqState, callback);
 	} 
 
 	getAccountState(apiKey, function(accState, accResult) {
@@ -62,7 +72,7 @@ exports.read = function (req, res) {
 			gender.findByName(name, function (err, result) {
 
 				if(err) {
-					return res.status(error.api.code).send(error.api);
+					return sendResponse(res, error.api.code, error.api, callback);
 				}
 
 				accResult.incRequestCount();
@@ -71,18 +81,20 @@ exports.read = function (req, res) {
 				if (!result) {
 					var missingName = new Name( { name : name });
 					missingName.saveIfNotExist();
-					return res.send({ name : name, gender: null })
+					var emptyGender = { name : name, gender: null };
+					return sendResponse(res, 200, emptyGender, callback);
 				}
 
-				res.send(result);
+				sendResponse(res, 200, result, callback);
 			});	
 		} else {
-			res.status(accState.code).send(accState);
+			sendResponse(res, accState.code, accState, callback);
 		}
 	});
 }
 
+
 exports.notFound = function (req, res) {
-	res.status(404)        
-   		.send(error.notFound);
+	var callback = req.query.callback;
+	sendResponse(res, 404, error.notFound, callback);
 }
