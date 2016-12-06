@@ -60,7 +60,7 @@ Gender Checker API
           $("#jsonp-response").text(JSON.stringify(json));
         }
         $.ajax({
-          url: "http://localhost:3000/?apiKey=D3F6AC8F-883B-415A-872B-2109F25EBAAD&name=Jessica",
+          url: "http://localhost:3000/?apiKey=D4F6CC8A-883B-415B-872B-3218F25EBAAD&name=Jessica",
           dataType: "jsonp",
           jsonpCallback: "myCallbackFunc"
         });
