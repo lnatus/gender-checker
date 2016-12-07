@@ -23,6 +23,7 @@ var options = {
 var app = express();
 
 app.get('/', api.read);
+app.get('/stats', api.accountStats);
 app.get('*', api.notFound);
 
 mongoose.connect(build.mongoDBConnection);

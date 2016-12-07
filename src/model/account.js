@@ -19,7 +19,7 @@ AccountSchema.path('apiKey').required(true, 'apiKey is required');
 /* Private Helper */
 
 var isOneTimeLimitExceeded = function (acc) {
-	 if(subscription[acc.subscription] < acc.requestCount) {
+	 if(subscription.limit[acc.subscription] < acc.requestCount) {
 		 acc.isExpired = true;
 		 acc.save();
 		 return true;
@@ -32,7 +32,7 @@ var isOneTimeLimitExceeded = function (acc) {
 var isMonthlyLimitExceeded = function (acc) {
 	var month = new Date().getMonth();
 		if (month === acc.month) {
-			return subscription[acc.subscription] < acc.requestCount;
+			return subscription.limit[acc.subscription] < acc.requestCount;
 		} 
 		else {
 			acc.month = month;

@@ -1,8 +1,12 @@
 var validator = require('validator');
 var error = require('../config/error');
+var subscription = require('../config/subscription');
+
 var Gender = require('../model/gender');
 var Account = require('../model/account');
 var Name = require('../model/name');
+
+/* Private */
 
 var getRequestState = function (apiKey, name) {
 	var state = { code : 0 };
@@ -47,6 +51,15 @@ var getAccountState = function (apiKey, next) {
 	});
 }
 
+var transformAccountResult = function(account) {
+	return {
+		apiKey : account.apiKey,
+		requestCount : account.requestCount,
+		subscription : subscription.mapping[account.subscription],
+		limit : subscription.limit[account.subscription]
+	}
+}
+
 var sendResponse = function (res, state, payload, callback) {
 	if(callback) {
 		res.status(state).jsonp(payload);
@@ -54,6 +67,8 @@ var sendResponse = function (res, state, payload, callback) {
 		res.status(state).send(payload);
 	}
 }
+
+/* Exports */
 
 exports.read = function (req, res) {
 	var apiKey = req.query.apiKey;
@@ -93,6 +108,18 @@ exports.read = function (req, res) {
 	});
 }
 
+exports.accountStats = function (req, res) {
+	var apiKey = req.query.apiKey;
+	var callback = req.query.callback;
+	getAccountState(apiKey, function(accState, accResult) {
+		if (accResult) {
+			var accountRespone = transformAccountResult(accResult);
+			sendResponse(res, 200, accountRespone, callback);
+		} else {
+			sendResponse(res, accState.code, accState, callback)
+		}
+	});
+}
 
 exports.notFound = function (req, res) {
 	var callback = req.query.callback;
