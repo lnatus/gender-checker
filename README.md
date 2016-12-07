@@ -4,14 +4,14 @@ Gender Checker API
 
 ## API Usage
 
-### Sample request
+### Sample gender request
 
-`http:\\gender-checker.com\api?apiKey=B567228F-56C0-416D-BE1A-44820CFBEF22&name=Max`
+`http:\\gender-checker.com\?apiKey=B567228F-56C0-416D-BE1A-44820CFBEF22&name=Max`
 
 	* apiKey (Required)
 	* name (Required)
 
-### Sample response
+### Sample gender response
 
 #### Male
 
@@ -24,6 +24,15 @@ Gender Checker API
 #### Name not found 
 
 `{name : "RarelyName", gender: null}`
+
+### Sample statistic request
+
+`http:\\gender-checker.com\stats?apiKey=B567228F-56C0-416D-BE1A-44820CFBEF22`
+
+
+### Sample statistic response
+
+`{"apiKey":"B567228F-56C0-416D-BE1A-44820CFBEF22","requestCount":100,"subscription":"One Time Premium Account Subscription","limit":100000}`
 
 ## Error Codes
 
